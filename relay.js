@@ -20,7 +20,7 @@ router.get('/', async (req,res) => {
 if(gun_root){
     router.get(`/${gun_root}`, async (req,res) => {
         let v;
-        gun.get('blog').once(out=>{v = out; console.log(out)}).then(()=>{
+        gun.get(gun_root).once(out=>{v = out; console.log(out)}).then(()=>{
             try{
                 return res.status(200).json({message: v});
             }catch(_){
