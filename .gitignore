@@ -1,0 +1,10 @@
+# folders
+node_modules/
+data/
+test/
+
+# files
+.env
+deploy.yml
+nginx.conf
+notes.txt
