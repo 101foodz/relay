@@ -24,7 +24,7 @@ if(gun_root){
             try{
                 return res.status(200).json({message: v});
             }catch(_){
-                return res.status(500).json({message: "Something went wrong. Could not load blog."});
+                return res.status(500).json({message: `Something went wrong. Could not load ${gun_root}.`});
             }
         });
     })
