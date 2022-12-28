@@ -20,7 +20,7 @@ router.get('/', async (req,res) => {
 if(gun_root){
     router.get(`/${gun_root}`, async (req,res) => {
         let v;
-        gun.get(gun_root).once(out=>{v = out; console.log(out)}).then(()=>{
+        gun.get(gun_root).once(out=>{v = out;}).then(()=>{
             try{
                 return res.status(200).json({message: v});
             }catch(_){
@@ -35,7 +35,7 @@ app.use('/',router)
 app.use('gundb', Gun)
 
 var server = app.listen(port, '0.0.0.0', ()=>{
-    console.log('nodes manager started on port ' + port + ' with /gun')
+    console.log('relay started on port ' + port + ' with /gun')
 })
 
 function getPeers(){
@@ -46,8 +46,6 @@ function getPeers(){
         throw "";
     }catch(_){ return ['']; }
 }
-
-console.log('peers:', getPeers())
 
 const gun = Gun({
     peers: getPeers(),
@@ -62,4 +60,4 @@ const gun = Gun({
     }
 })
 
-global.gun = gun;                           /// make global to `node --inspect` - debug only
+global.gun = gun;

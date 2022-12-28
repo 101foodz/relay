@@ -8,3 +8,4 @@ test/
 deploy.yml
 nginx.conf
 notes.txt
+routes.rest
