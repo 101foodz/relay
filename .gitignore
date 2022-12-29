@@ -1,11 +1,14 @@
-# folders
 node_modules/
 data/
 test/
+services.d/
 
-# files
 .env
 deploy.yml
 nginx.conf
 notes.txt
 routes.rest
+Dockerfile
+Makefile
+*.rest
+.dockerignore

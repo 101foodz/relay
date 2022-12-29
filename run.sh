@@ -1,12 +1,10 @@
 #!/bin/bash
 
-clear
-
 # --------------------
 # GET SOURCES
 # --------------------
 # NOTE: 'REPO' Passed via deploy file
-git clone $REPO
+git clone $REPO && cd 'relay' && npm install
 
 # --------------------
 # GET SOURCES
@@ -18,12 +16,7 @@ GUN_PUB=$(echo $SETTINGS_DATA | jq -r '.pub')       && echo "GUN_PUB=$GUN_PUB" >
 GUN_ROOT=$(echo $SETTINGS_DATA | jq -r '.root')     && echo "GUN_ROOT=$GUN_ROOT" >> .env
 GUN_PEERS=$(echo $SETTINGS_DATA | jq -r '.peers')   && echo "GUN_PEERS=$GUN_PEERS" >> .env
 
-# echo "API_URI=$API_URI" > .env
-# echo "GUN_PUB=$GUN_PUB" >> .env
-# echo "GUN_ROOT=$GUN_ROOT" >> .env
-# echo "GUN_PEERS=$GUN_PEERS" >> .env
-
 # --------------------
 # RUN
 # --------------------
-node relay.js
+node relay.js </dev/null &>/dev/null &
