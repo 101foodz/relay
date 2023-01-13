@@ -1,4 +1,6 @@
 require('dotenv').config()
+const CRON = require('./cron')
+// const { default: cron } = require('./cron')
 
 const express = require('express')
 const cors = require('cors')
@@ -17,17 +19,26 @@ router.get('/', async (req,res) => {
     res.status(200).json({message: 'ok'})
 })
 
+/* DYNAMIC ROUTE CREATION */
 if(gun_root){
-    router.get(`/${gun_root}`, async (req,res) => {
-        let v;
-        gun.get(gun_root).once(out=>{v = out;}).then(()=>{
-            try{
-                return res.status(200).json({message: v});
-            }catch(_){
-                return res.status(500).json({message: `Something went wrong. Could not load ${gun_root}.`});
-            }
-        });
-    })
+    let rootmap = gun_root.split(',');
+    if(rootmap.length > 0){
+        try{
+            rootmap.forEach((node)=>{
+                let rootnode = node.trim();
+                router.get(`/root/${rootnode}`, async (req,res) => {
+                    let v;
+                    gun.get(rootnode).once(out=>{v = out;}).then(()=>{
+                        try{
+                            return res.status(200).json({message: v});
+                        }catch(_){
+                            return res.status(500).json({message: `Something went wrong. Could not load ${rootnode}.`});
+                        }
+                    });
+                })
+            })
+        }catch(_){}
+    }
 }
 
 app.use('/',router)
@@ -36,6 +47,7 @@ app.use('gundb', Gun)
 
 var server = app.listen(port, '0.0.0.0', ()=>{
     console.log('relay started on port ' + port + ' with /gun')
+    CRON.cronTasks();
 })
 
 function getPeers(){
@@ -61,3 +73,4 @@ const gun = Gun({
 })
 
 global.gun = gun;
+global.gun_root = gun_root;

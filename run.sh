@@ -4,7 +4,7 @@
 # GET SOURCES
 # --------------------
 # NOTE: 'REPO' Passed via deploy file
-git clone $REPO && cd 'relay' && npm install
+# git clone $REPO && cd 'relay' && npm install
 
 # --------------------
 # GET SOURCES
