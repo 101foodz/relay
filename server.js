@@ -9,7 +9,7 @@ const Gun = require('gun')
 const port = process.env.PORT ? process.env.PORT : 8080;
 const gun_root = process.env.GUN_ROOT ? process.env.GUN_ROOT : undefined;
 const root_pub = process.env.GUN_PUB ? process.env.GUN_PUB : undefined;
-
+const settings = process.env.SETTINGS_URI ? process.env.SETTINGS_URI : '';
 
 const app = express();
 
@@ -77,3 +77,4 @@ const gun = Gun({
 global.gun = gun;
 global.gun_root = gun_root;
 global.root_pub = root_pub;
+global.settings_uri = settings;
