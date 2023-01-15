@@ -4,7 +4,6 @@ deployments
 reports
 data
 test
-services.d
 
 # FILE
 .dockerignore
@@ -14,7 +13,6 @@ deploy.yml
 nginx.conf
 notes.txt
 Makefile
-*.rest
-dev.sh
+test.sh
 .env
 .dev
